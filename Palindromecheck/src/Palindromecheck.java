@@ -1,22 +1,25 @@
 public class Palindromecheck {
-    public static void main (String[] args){public class UseCase3PalindromeCheckerApp {
+    public static void main (String[] args){String input = "madam";
+        Stack<Character> stack = new Stack<>();
 
-        public static void main(String[] args) {
+        for (int i = 0; i < input.length(); i++) {
+            stack.push(input.charAt(i));
+        }
 
-            String original = "level";
-            String reversed = "";
+        boolean isPalindrome = true;
 
-            for (int i = original.length() - 1; i >= 0; i--) {
-                reversed = reversed + original.charAt(i);
-            }
-
-            if (original.equals(reversed)) {
-                System.out.println(original + " is a Palindrome.");
-            } else {
-                System.out.println(original + " is NOT a Palindrome.");
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) != stack.pop()) {
+                isPalindrome = false;
+                break;
             }
         }
-    }
+
+        if (isPalindrome) {
+            System.out.println(input + " is a Palindrome.");
+        } else {
+            System.out.println(input + " is NOT a Palindrome.");
+        }
 
     }
 }
