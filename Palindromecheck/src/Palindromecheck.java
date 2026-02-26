@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 public class Palindromecheck {
     public static void main (String[] args){String input = "madam";
         Stack<Character> stack = new Stack<>();
