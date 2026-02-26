@@ -1,16 +1,33 @@
 public class Palindromecheck {
-    public static void main (String[] args){String word = "madam";
-        String reversed = "";
+    public static void main (String[] args){public class UseCase4PalindromeCheckerApp {
 
-        for (int i = word.length() - 1; i >= 0; i--) {
-            reversed = reversed + word.charAt(i);
-        }
+        public static void main(String[] args) {
 
-        if (word.equals(reversed)) {
-            System.out.println(word + " is a Palindrome.");
-        } else {
-            System.out.println(word + " is NOT a Palindrome.");
+            String input = "radar";
+            char[] characters = input.toCharArray();
+
+            int start = 0;
+            int end = characters.length - 1;
+            boolean isPalindrome = true;
+
+            while (start < end) {
+                if (characters[start] != characters[end]) {
+                    isPalindrome = false;
+                    break;
+                }
+                start++;
+                end--;
+            }
+
+            if (isPalindrome) {
+                System.out.println(input + " is a Palindrome.");
+            } else {
+                System.out.println(input + " is NOT a Palindrome.");
+            }
         }
+    }
+
+
 
     }
 }
