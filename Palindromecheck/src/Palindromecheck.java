@@ -1,12 +1,13 @@
 import java.util.Scanner;
 import java.util.Stack;
+import java.util.Deque;
+import java.util.ArrayDeque;
 
 public class Palindromecheck {
 
-    public boolean checkPalindrome(String input) {
+    public static boolean stackMethod(String input) {
 
         String normalized = input.replaceAll("\\s+", "").toLowerCase();
-
         Stack<Character> stack = new Stack<>();
 
         for (int i = 0; i < normalized.length(); i++) {
@@ -22,6 +23,41 @@ public class Palindromecheck {
         return true;
     }
 
+    public static boolean dequeMethod(String input) {
+
+        String normalized = input.replaceAll("\\s+", "").toLowerCase();
+        Deque<Character> deque = new ArrayDeque<>();
+
+        for (int i = 0; i < normalized.length(); i++) {
+            deque.addLast(normalized.charAt(i));
+        }
+
+        while (deque.size() > 1) {
+            if (!deque.removeFirst().equals(deque.removeLast())) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static boolean twoPointerMethod(String input) {
+
+        String normalized = input.replaceAll("\\s+", "").toLowerCase();
+        int start = 0;
+        int end = normalized.length() - 1;
+
+        while (start < end) {
+            if (normalized.charAt(start) != normalized.charAt(end)) {
+                return false;
+            }
+            start++;
+            end--;
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -29,15 +65,22 @@ public class Palindromecheck {
         System.out.print("Enter a string: ");
         String input = scanner.nextLine();
 
-        Palindromecheck checker = new Palindromecheck();
+        long startTime1 = System.nanoTime();
+        boolean result1 = stackMethod(input);
+        long endTime1 = System.nanoTime();
 
-        boolean result = checker.checkPalindrome(input);
+        long startTime2 = System.nanoTime();
+        boolean result2 = dequeMethod(input);
+        long endTime2 = System.nanoTime();
 
-        if (result) {
-            System.out.println("The given string is a Palindrome.");
-        } else {
-            System.out.println("The given string    is NOT a Palindrome.");
-        }
+        long startTime3 = System.nanoTime();
+        boolean result3 = twoPointerMethod(input);
+        long endTime3 = System.nanoTime();
+
+        System.out.println("\nResults:");
+        System.out.println("Stack Method: " + result1 + " | Time: " + (endTime1 - startTime1) + " ns");
+        System.out.println("Deque Method: " + result2 + " | Time: " + (endTime2 - startTime2) + " ns");
+        System.out.println("Two Pointer Method: " + result3 + " | Time: " + (endTime3 - startTime3) + " ns");
 
         scanner.close();
     }
